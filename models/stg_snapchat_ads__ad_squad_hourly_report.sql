@@ -30,7 +30,7 @@ final as (
         source_relation, 
         ad_squad_id,
         --cast (date as {{ dbt.type_timestamp() }}) as date_hour,
-        TIMESTAMP(DATETIME(TIMESTAMP(date), "America/Chicago")) as date_hour,
+        TIMESTAMP(CAST(date AS {{ dbt.type_timestamp() }}), "America/Chicago") as date_hour,
         attachment_quartile_1,
         attachment_quartile_2,
         attachment_quartile_3,
