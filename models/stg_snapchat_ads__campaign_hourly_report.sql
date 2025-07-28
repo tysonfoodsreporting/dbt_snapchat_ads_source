@@ -29,7 +29,8 @@ final as (
     select
         source_relation, 
         campaign_id,
-        cast (date as {{ dbt.type_timestamp() }}) as date_hour,
+        --cast (date as {{ dbt.type_timestamp() }}) as date_hour,
+        TIMESTAMP(DATETIME(TIMESTAMP(date), "America/Chicago")) as date_hour,
         attachment_quartile_1,
         attachment_quartile_2,
         attachment_quartile_3,
