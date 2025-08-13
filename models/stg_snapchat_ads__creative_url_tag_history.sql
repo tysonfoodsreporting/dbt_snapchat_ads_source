@@ -33,8 +33,8 @@ final as (
         creative_id,
         key as param_key,
         value as param_value,
-        --cast (updated_at as {{ dbt.type_timestamp() }}) as updated_at,
-        DATE(DATETIME(CAST(updated_at AS {{ dbt.type_timestamp() }}), "America/Chicago")) as updated_at,
+        cast (updated_at as {{ dbt.type_timestamp() }}) as updated_at,
+        --DATE(DATETIME(CAST(updated_at AS {{ dbt.type_timestamp() }}), "America/Chicago")) as updated_at,
 
         row_number() over (partition by source_relation, creative_id, key order by updated_at desc) =1 as is_most_recent_record
     from fields
