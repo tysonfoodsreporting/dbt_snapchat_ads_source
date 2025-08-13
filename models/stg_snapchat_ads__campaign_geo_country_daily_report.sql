@@ -31,7 +31,7 @@ final as (
         campaign_id,
         upper(country) as country,
         --cast(date as {{ dbt.type_timestamp() }}) as date_day,
-        TIMESTAMP(DATETIME(CAST(date AS {{ dbt.type_timestamp() }}), "America/Chicago")) as date_day,
+        DATE(DATETIME(CAST(date AS {{ dbt.type_timestamp() }}), "America/Chicago")) as date_day,
         attachment_quartile_1,
         attachment_quartile_2,
         attachment_quartile_3,

@@ -37,16 +37,16 @@ final as (
 
         name as campaign_name,
         --cast(_fivetran_synced as {{ dbt.type_timestamp() }}) as _fivetran_synced,
-        TIMESTAMP(DATETIME(CAST(_fivetran_synced AS {{ dbt.type_timestamp() }}), "America/Chicago")) as _fivetran_synced,
+        DATE(DATETIME(CAST(_fivetran_synced AS {{ dbt.type_timestamp() }}), "America/Chicago")) as _fivetran_synced,
 
         --cast(updated_at as {{ dbt.type_timestamp() }}) as updated_at,
-        TIMESTAMP(DATETIME(CAST(updated_at AS {{ dbt.type_timestamp() }}), "America/Chicago")) as updated_at,
+        DATE(DATETIME(CAST(updated_at AS {{ dbt.type_timestamp() }}), "America/Chicago")) as updated_at,
 
         (daily_budget_micro / 1000000.0) as daily_budget,
         --cast(start_time as {{ dbt.type_timestamp() }}) as start_time,
-        TIMESTAMP(DATETIME(CAST(start_time AS {{ dbt.type_timestamp() }}), "America/Chicago")) as start_time,
+        DATE(DATETIME(CAST(start_time AS {{ dbt.type_timestamp() }}), "America/Chicago")) as start_time,
         --cast(end_time as {{ dbt.type_timestamp() }}) as end_time,
-        TIMESTAMP(DATETIME(CAST(end_time AS {{ dbt.type_timestamp() }}), "America/Chicago")) as end_time,
+        DATE(DATETIME(CAST(end_time AS {{ dbt.type_timestamp() }}), "America/Chicago")) as end_time,
         (lifetime_spend_cap_micro / 1000000.0) as lifetime_spend_cap,
         status,
         objective,

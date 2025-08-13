@@ -31,14 +31,14 @@ final as (
         id as ad_squad_id,
         name as ad_squad_name,
         --cast (created_at as {{ dbt.type_timestamp() }}) as created_at,
-        TIMESTAMP(DATETIME(CAST(created_at AS {{ dbt.type_timestamp() }}), "America/Chicago")) as created_at,
+        DATE(DATETIME(CAST(created_at AS {{ dbt.type_timestamp() }}), "America/Chicago")) as created_at,
 
         campaign_id,
         --cast (_fivetran_synced as {{ dbt.type_timestamp() }}) as _fivetran_synced,
-        TIMESTAMP(DATETIME(CAST(_fivetran_synced AS {{ dbt.type_timestamp() }}), "America/Chicago")) as _fivetran_synced,
+        DATE(DATETIME(CAST(_fivetran_synced AS {{ dbt.type_timestamp() }}), "America/Chicago")) as _fivetran_synced,
 
         --cast (updated_at as {{ dbt.type_timestamp() }}) as updated_at,
-        TIMESTAMP(DATETIME(CAST(updated_at AS {{ dbt.type_timestamp() }}), "America/Chicago")) as updated_at,
+        DATE(DATETIME(CAST(updated_at AS {{ dbt.type_timestamp() }}), "America/Chicago")) as updated_at,
         row_number() over (partition by source_relation, id order by _fivetran_synced desc) = 1 as is_most_recent_record
     from fields
 )
