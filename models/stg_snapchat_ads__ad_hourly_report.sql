@@ -29,8 +29,8 @@ final as (
     select
         source_relation, 
         ad_id,
-        -- cast (date as {{ dbt.type_timestamp() }}) as date_hour,
-        DATETIME(date, "America/Chicago") AS date_hour,
+        cast (date as {{ dbt.type_timestamp() }}) as date_hour,
+        -- DATETIME(date, "America/Chicago") AS date_hour, --filtered next day UTC hours in where clause
         attachment_quartile_1,
         attachment_quartile_2,
         attachment_quartile_3,
@@ -57,6 +57,9 @@ final as (
         {{ snapchat_ads_fill_pass_through_columns(pass_through_fields=var('snapchat_ads__ad_hourly_passthrough_metrics'), except=(var('snapchat_ads__conversion_fields') + ['conversion_purchases_value'])) }}
 
     from fields
+
+    where DATE(date, "America/Chicago") <= CURRENT_DATE("America/Chicago")
+
 )
 
 select * 
