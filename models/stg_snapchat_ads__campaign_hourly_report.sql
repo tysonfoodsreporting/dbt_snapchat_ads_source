@@ -59,7 +59,7 @@ final as (
         
     from fields
     
-    where DATE(date, "America/Chicago") <= CURRENT_DATE("America/Chicago")
+    WHERE DATE(date) <= CURRENT_DATE("America/Chicago")
 )
 
 select *
